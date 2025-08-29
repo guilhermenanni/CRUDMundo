@@ -1,0 +1,14 @@
+create database db_mundo;
+use db_mundo;
+
+create table tb_pais(
+    id_pais int auto_increment primary key,
+    nm_pais varchar(45)
+);
+
+create table tb_cidade(
+    id_cidade int auto_increment primary key,
+    id_pais int not null,
+    nm_cidade varchar(45),
+    foreign key (id_pais) references tb_pais(id_pais)
+);
