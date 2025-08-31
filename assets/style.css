@@ -1,0 +1,101 @@
+/* Seletor universal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.country-city-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+}
+
+/* Cada li ocupa metade da barra */
+.country-city-ul li.left,
+.country-city-ul li.right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* Alinhamento dentro da metade */
+.country-city-ul li.left {
+    justify-content: flex-start; /* link fica no início da metade */
+}
+
+.country-city-ul li.right {
+    justify-content: flex-end;   /* link fica no fim da metade */
+}
+
+/* Link ocupa 100% da metade correspondente */
+.country-city-ul li a {
+    display: block;
+    width: 100%;                /* preenche toda a metade */
+    text-align: center;         /* centraliza o texto dentro da metade */
+    padding: 10px 0;            /* apenas padding vertical */
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* Página ativa */
+.country-city-ul li a.active {
+    background-color: #87CEFA; /* azul claro */
+    color: white;
+}
+
+/* Hover para páginas não ativas */
+.country-city-ul li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+
+
+body {
+  display: block;
+  text-align: center;
+}
+/* Formulário empilhado */
+.form-city form {
+    display: flex;
+    flex-direction: column; /* organiza os elementos em coluna */
+    gap: 15px;              /* espaço entre os inputs e botão */
+    width: 300px;           /* largura opcional do form */
+    margin: 20px auto;      /* centraliza o form horizontalmente */
+}
+
+/* Inputs e botão ocupam toda largura do form */
+.form-city input[type="text"],
+.form-city input[type="submit"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box; /* garante que padding não quebre a largura */
+}
+
+/* Página ativa ocupa a metade inteira correspondente */
+.country-city-ul li a.active {
+    background-color: #c3e8ff; /* azul claro para a página ativa */
+    color: rgb(0, 0, 0);
+}
+
+/* Página inativa */
+.country-city-ul li a {
+    background-color: #ccc; /* cinza para a página não ativa */
+    color: black;
+}
+
+/* Hover para páginas não ativas */
+.country-city-ul li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.selected {
+  background-color: #c3e8ff;
+}
