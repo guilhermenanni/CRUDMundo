@@ -12,6 +12,6 @@ if (!$conex){
 }
 
 echo "conexao realizada com sucesso";
-mysqli_select_db($conex $database);
+mysqli_select_db($conex, $database);
 
 ?>

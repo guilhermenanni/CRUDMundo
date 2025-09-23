@@ -1,0 +1,17 @@
+*{
+    padding: 0%;
+    border: 0%;
+    margin: 0%;
+}
+
+.pre-form{
+    text-align: center;
+    padding: 10px;
+}
+
+.pre-form h1{
+    text-align: center;
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+}
