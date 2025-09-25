@@ -1,9 +1,9 @@
-<?php include("conn.php"); ?>
+<?php include("includes/conn.php"); ?>
 
 <?php
 
-$sql = "SELECT nm_pais FROM tb_pais;"
-
+$sql = "SELECT nm_pais FROM tb_pais ORDER BY nm_pais";
+$sql_ans = mysqli_query($conex, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ $sql = "SELECT nm_pais FROM tb_pais;"
     <link rel="stylesheet" href="assets/styles.css">
     <title>CRUDMundo</title>
 </head>
-<?php require 'header.php' ?>
+<?php require ("includes/header.php") ?>
 
 <body>
     <main>
@@ -26,8 +26,14 @@ $sql = "SELECT nm_pais FROM tb_pais;"
             <div class="row-table-elements">
                 <h2>paises</h2>
                 <form action="index.php" method="post">
-                <p>nome do pais</p>
-                <input type="text" name="nm_pais">
+                    <select name="nm_pais" id="nm_pais">
+                        <?php
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $nome = htmlspecialchars($row['nm_pais']);
+                            echo "<option value='$nome'>$nome</option>";
+                        }
+                        ?>
+                    </select>
                 <input class="btn-submit" type="submit" name="consultar">
                 </form>
             </div>
@@ -35,6 +41,6 @@ $sql = "SELECT nm_pais FROM tb_pais;"
 
     </main>
 </body>
-<?php require 'footer.php' ?>
+<?php require ("includes/footer.php") ?>
 
 </html>
