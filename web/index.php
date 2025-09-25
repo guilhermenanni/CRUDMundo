@@ -1,5 +1,11 @@
 <?php include("conn.php"); ?>
 
+<?php
+
+$sql = "SELECT nm_pais FROM tb_pais;"
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,18 +24,17 @@
         </div>
         <div class="tabela-pais">
             <div class="row-table-elements">
-                <p>paises</p>
+                <h2>paises</h2>
                 <form action="index.php" method="post">
+                <p>nome do pais</p>
                 <input type="text" name="nm_pais">
-                <input type="text" name="lingua_pais">
-                <input type="text" name="continente_pais">
-                <input type="submit" name="enviar">
+                <input class="btn-submit" type="submit" name="consultar">
                 </form>
             </div>
         </div>
 
     </main>
-
 </body>
+<?php require 'footer.php' ?>
 
 </html>
