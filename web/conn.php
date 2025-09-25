@@ -11,7 +11,6 @@ if (!$conex){
     die ("falha na conexao, " .mysqli_connect_error());
 }
 
-echo "conexao realizada com sucesso";
 mysqli_select_db($conex, $database);
 
 ?>
