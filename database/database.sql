@@ -1,3 +1,5 @@
+set sql_safe_updates = 0;
+
 CREATE DATABASE db_mundo;
 USE db_mundo;
 
@@ -14,3 +16,16 @@ nm_cidade VARCHAR(90) NOT NULL,
 FOREIGN KEY (fk_pais) references tb_pais(nm_pais)
 );
 
+INSERT INTO tb_pais(nm_pais, continente_pais, lingua_pais) VALUES 
+('japão', 'ásia', 'japones'),
+('brasil', 'sul-americano', 'portugues'),
+('china', 'asia', 'chines'),
+('chile', 'sul-americano', 'espanhol'),
+('india', 'asia', 'hindi');
+
+INSERT INTO tb_cidade(fk_pais, nm_cidade) VALUES
+('japão', 'kyoto'),
+('brasil', 'são paulo'),
+('china', 'pequim'),
+('chile', 'pucon'),
+('india', 'nova delhi');

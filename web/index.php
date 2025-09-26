@@ -22,23 +22,25 @@ $sql_ans = mysqli_query($conex, $sql);
         <div class="pre-form">
             <h1>CRUDMundo</h1>
         </div>
+
         <div class="tabela-pais">
             <div class="row-table-elements">
                 <h2>paises</h2>
                 <form action="index.php" method="post">
                     <select name="nm_pais" id="nm_pais">
                         <?php
-                        while($row = mysqli_fetch_assoc($result)) {
+                        while($row = mysqli_fetch_assoc($sql_ans)) {
                             $nome = htmlspecialchars($row['nm_pais']);
                             echo "<option value='$nome'>$nome</option>";
                         }
                         ?>
                     </select>
                 <input class="btn-submit" type="submit" name="consultar">
+                <input type="text" n>
                 </form>
             </div>
         </div>
-
+    
     </main>
 </body>
 <?php require ("includes/footer.php") ?>
