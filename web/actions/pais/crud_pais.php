@@ -1,4 +1,7 @@
 <?php
+require("../../includes/general/conn.php");
+
+
     switch ($_REQUEST['acao']){
         case 'create':
             $sql = "INSERT INTO tb_pais(nm_pais, lingua_pais, continente_pais) VALUES('".$_POST['nm_pais']."', '".$_POST['lingua_pais']."', '".$_POST['continente_pais']."')";

@@ -9,23 +9,25 @@
     <link rel="stylesheet" href="assets/styles.css">
     <title>CRUDMundo</title>
 </head>
+
 <body>
-    <?php require ("includes/general/header.php"); ?>
+    <?php require("includes/general/header.php"); ?>
     <main>
         <div class="pre-form">
             <h1>CRUDMundo</h1>
-                        <?php require("includes/pais/cadastrar_pais.php");?>      
         </div>
         <div class="tabela-pais">
             <div class="row-table-elements">
                 <h2>paises</h2>
+                <?php require("includes/pais/cadastrar_pais.php"); ?>
+
             </div>
             <form>
-             </form>
+            </form>
         </div>
-    
+
     </main>
 </body>
-<?php require ("includes/general/footer.php"); ?>
+<?php require("includes/general/footer.php"); ?>
 
 </html>
