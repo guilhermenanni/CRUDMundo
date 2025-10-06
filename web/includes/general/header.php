@@ -1,6 +1,6 @@
 <header>
     <div>
         <a href="index.php">inicio</a>
-        <a href="create.php">create</a>
+        <a href="cadastrar_pais.php">create</a>
     </div>
 </header>

@@ -1,5 +1,5 @@
 <?php
-require("../../includes/general/conn.php");
+require("../includes/general/conn.php");
 
 
     switch ($_REQUEST['acao']){
@@ -8,6 +8,7 @@ require("../../includes/general/conn.php");
             $ans = $conex->query($sql);
             if ($ans==true){
                 print "<script>alert('pais cadastrado com sucesso');</script>";
+                print "<script>location.href='../cadastrar_pais.php'</script>";
             }else{
                 print "<script>alert('erro ao cadastrar');</script>".mysqli_error($conex);
             }
