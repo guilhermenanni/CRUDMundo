@@ -28,14 +28,6 @@ footer {
     box-sizing: border-box;
 }
 
-header{
-    text-align: center;
-    background-color: grey;
-    padding: 2%;
-    font-size: larger;  
-    width: 100%;
-}
-
 main{
     flex-direction: column;
     align-content: center;
@@ -53,6 +45,18 @@ body{
     background-color:azure;
     justify-items: center;
     align-items: center;
+}
+
+.row-table-elements{
+    align-items: baseline
+}
+
+form{
+        display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center; /* centraliza horizontalmente */
+    flex-wrap: wrap;
 }
 
 .tabela-pais{

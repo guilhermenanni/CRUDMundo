@@ -18,14 +18,20 @@
         </div>
         <div class="tabela-pais">
             <div class="row-table-elements">
-                <h2>paises</h2>
-                <h1>cadastrar pais</h1>
+                <h1>paises</h1>
                 <form action="actions/crud_pais.php" method="POST" class="pais-create">
-                    <input type="hidden" name="acao" value="create">
-                    <input type="text" name="nm_pais">
-                    <input type="text" name="continente_pais">
-                    <input type="text" name="lingua_pais">
-                    <button type="submit">cadastrar</button>
+                    <input type="text" name="nm_pais" placeholder="nome" required>
+                    <input type="text" name="lingua_pais" placeholder="lingua falada" required>
+                        <select id="continente_pais" name="continente_pais" placeholder="continente" required >
+                            <option value="NORTE-AMERICA4">Ameriaca do norte</option>
+                            <option value="SUL-AMERICA">America do sul</option>
+                            <option value="Europa">Europa</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+                    <button type="submit" value="create" name="acao">cadastrar</button>
+                    <button type="submit" value="delete" name="acao">excluir</button>
                 </form>
 
             </div>

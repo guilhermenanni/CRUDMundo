@@ -19,7 +19,7 @@ require("../includes/general/conn.php");
             break;
         
         case 'delete':
-
+            $sql = "DELETE * FROM tb_pais WHERE nm_pais = "
             break;
     }
 
