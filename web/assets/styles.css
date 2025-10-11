@@ -59,6 +59,12 @@ form{
     flex-wrap: wrap;
 }
 
+.tables{
+    text-align: center;
+    padding: 10px;
+    
+}
+
 .tabela-pais{
     background-color: white;
     border-radius: 10px;

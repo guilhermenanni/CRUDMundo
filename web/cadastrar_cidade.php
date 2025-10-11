@@ -20,22 +20,34 @@
             <div class="row-table-elements">
                 <h1>Cidades</h1>
                 <form action="actions/crud_cidade.php" method="POST" class="pais-create">
-                    <input type="hidden" name="acao" value="create">
                     <input type="text" name="nm_cidade" placeholder="nome" required>
                     <input type="text" name="fk_pais" placeholder="pais ao qual pertence" required>
-                    <button type="submit">cadastrar</button>
-                    <button type="submit">excluir</button>
+                    <button type="submit" name="acao" value="create">cadastrar</button>
+                    <button type="submit" name="acao" value="delete">excluir</button>
                 </form>
-
             </div>
-            <form>
-            </form>
-        </div>
-            </div>
-            <form>
-            </form>
         </div>
 
+        <div class="tables">
+        <?php
+        $sql_rows = "SELECT * FROM tb_cidade";
+        $ans_rows = $conex->query($sql_rows);
+        $qt_rows = $ans_rows->num_rows;
+
+        if ($qt_rows > 0) {
+            print "<table>";
+            while ($row = $ans_rows->fetch_object()) {
+                print "<tr>";
+                print "<td> . $row->id_cidade.</td>";
+                print "<td> . $row->nm_cidade.</td>";
+                print "<td> . $row->fk_pais.</td>";
+                print "</tr>";
+            }
+            print "</table>";
+        } else {
+        }
+        ?>
+        </div>
     </main>
 </body>
 <?php require("includes/general/footer.php"); ?>
