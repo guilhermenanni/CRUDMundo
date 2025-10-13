@@ -4,7 +4,6 @@ require("../includes/general/conn.php");
 $nm_pais = $_POST['nm_pais'];
 $lingua_pais = $_POST['lingua_pais'];
 $continente_pais = $_POST['continente_pais'];
-$nm_pais = $_POST['nm_pais'];
 
     switch ($_REQUEST['acao']){
         case 'create':
@@ -22,7 +21,7 @@ $nm_pais = $_POST['nm_pais'];
 
             break;
         case 'delete':
-            $sql1 = "DELETE FROM tb_cidade WHERE fk_pais = '$nm_pais'";
+            $sql1 = "DELETE FROM tb_cidade WHERE nm_pais = '$nm_pais'";
             $ans1 =  $conex->query($sql1);
             if ($ans1==true){
                 print "<script>alert('pais excluido com sucesso');</script>";

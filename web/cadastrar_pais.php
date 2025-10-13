@@ -20,9 +20,9 @@
             <div class="row-table-elements">
                 <h1>paises</h1>
                 <form action="actions/crud_pais.php" method="POST" class="pais-create">
-                    <input type="text" name="nm_pais" placeholder="nome" required>
-                    <input type="text" name="lingua_pais" placeholder="lingua falada" required>
-                        <select id="continente_pais" name="continente_pais" placeholder="continente" required >
+                        <input type="text" name="nm_pais" placeholder="nome" required>
+                        <input type="text" name="lingua_pais" placeholder="lingua falada" required>
+                        <select id="continente_pais" name="continente_pais" placeholder="continente" required>
                             <option value="NORTE-AMERICA4">Ameriaca do norte</option>
                             <option value="SUL-AMERICA">America do sul</option>
                             <option value="Europa">Europa</option>
