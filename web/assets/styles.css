@@ -46,7 +46,7 @@ body{
     justify-items: center;
     align-items: center;
 }
-
+git
 .row-table-elements{
     align-items: baseline
 }
@@ -59,11 +59,6 @@ form{
     flex-wrap: wrap;
 }
 
-.tables{
-    text-align: center;
-    padding: 10px;
-    
-}
 
 .tabela-pais{
     background-color: white;

@@ -1,6 +1,7 @@
 <?php
 require("../includes/general/conn.php");
 
+$id_cidade = $_POST['id_cidade'];
 $nm_cidade = $_POST['nm_cidade'];
 $id_pais = $_POST['id_pais']; 
 
@@ -32,7 +33,7 @@ $id_pais = $_POST['id_pais'];
             break;
         
         case 'delete':
-            $sql = "DELETE FROM tb_cidade WHERE nm_cidade = '$nm_cidade'";
+            $sql = "DELETE FROM tb_cidade WHERE id_cidade = '$id_cidade'";
             $ans = $conex->query(query: $sql);
 
             if ($ans==true){

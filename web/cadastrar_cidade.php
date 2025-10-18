@@ -22,12 +22,11 @@
                         <input type="text" name="nm_cidade" placeholder="nome" required>
                         <input type="text" name="id_pais" placeholder="pais ao qual pertence" required>
                     <button type="submit" name="acao" value="create">cadastrar</button>
-                    <button type="submit" name="acao" value="delete">excluir</button>
                 </form>
             </div>
         </div>
 
-        <div class="tables">
+        <div class="table table-border table-striped d-flex justify-content-center">
         <?php
         $sql_rows = "SELECT tb_cidade.id_cidade, tb_cidade.nm_cidade, tb_pais.nm_pais FROM tb_cidade JOIN tb_pais ON tb_cidade.id_pais = tb_pais.id_pais";
         $ans_rows = $conex->query($sql_rows);
@@ -39,11 +38,22 @@
 
         if ($qt_rows > 0) {
             print "<table>";
+            print "<th>ID</th>";
+            print "<th>Nome</th>";
+            print "<th>pais</th>";
+            print "<th>acoes</th>";
+            print "</tr>";
             while ($row = $ans_rows->fetch_object()) {
                 print "<tr>";
                 print "<td>".$row->id_cidade."</td>";
                 print "<td>".$row->nm_cidade."</td>";
                 print "<td>".$row->nm_pais."</td>";
+                print "<td>
+                        <button type='submit' name='acao' value='delete' id=".$row->id_cidade."'>excluir</button>
+                        </td>";
+                print "<td>
+                            <button type='button' onclick='window.location.href='editar_cidade.php'>editar</button>
+                        </td>";
                 print "</tr>";
             }
             print "</table>";

@@ -33,12 +33,39 @@
                     <button type="submit" value="create" name="acao">cadastrar</button>
                     <button type="submit" value="delete" name="acao">excluir</button>
                 </form>
-
             </div>
-            <form>
-            </form>
         </div>
+        <div class="table table-border table-striped d-flex justify-content-center">
+       <?php
+        $sql_rows = "SELECT * FROM tb_pais";
+        $ans_rows = $conex->query($sql_rows);
+        $qt_rows = $ans_rows->num_rows;
 
+        if(!$ans_rows){
+            die("erro".$conex->error);
+        }
+
+        if ($qt_rows > 0) {
+            print "<tr>";
+            print "<table>";
+            print "<th>ID</th>";
+            print "<th>Nome</th>";
+            print "<th>Continente</th>";
+            print "<th>Lingua</th>";
+            print "</tr>";
+            while ($row = $ans_rows->fetch_object()) {
+                print "<tr>";
+                print "<td>".$row->id_pais."</td>";
+                print "<td>".$row->nm_pais."</td>";
+                print "<td>".$row->continente_pais."</td>";
+                print "<td>".$row->lingua_pais."</td>";
+                print "</tr>";
+            }
+            print "</table>";
+        } else {
+            echo "erro ao consultar os dados das cidades";
+        }
+        ?>    
     </main>
 </body>
 <?php require("includes/general/footer.php"); ?>

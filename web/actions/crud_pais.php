@@ -1,9 +1,11 @@
 <?php
 require("../includes/general/conn.php");
 
+$id_pais = $_POST['id_pais'];
 $nm_pais = $_POST['nm_pais'];
 $lingua_pais = $_POST['lingua_pais'];
 $continente_pais = $_POST['continente_pais'];
+
 
     switch ($_REQUEST['acao']){
         case 'create':
@@ -30,7 +32,7 @@ $continente_pais = $_POST['continente_pais'];
                 print "<script>alert('erro ao excluir ans1');</script>".mysqli_error($conex);
             }
             
-            $sql2 = "DELETE FROM tb_pais WHERE nm_pais = '$nm_pais'";
+            $sql2 = "DELETE FROM tb_pais WHERE id_pais = '$id_pais'";
             $ans2 =  $conex->query($sql2);
             if ($ans2==true ){
                 print "<script>alert('pais excluido com sucesso');</script>";
