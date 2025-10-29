@@ -30,35 +30,42 @@
         <?php
         $sql_rows = "SELECT tb_cidade.id_cidade, tb_cidade.nm_cidade, tb_pais.nm_pais FROM tb_cidade JOIN tb_pais ON tb_cidade.id_pais = tb_pais.id_pais";
         $ans_rows = $conex->query($sql_rows);
-        $qt_rows = $ans_rows->num_rows;
 
         if(!$ans_rows){
-            die("eero".$conex->error);
+            die("Erro: " . $conex->error);
         }
 
+        $qt_rows = $ans_rows->num_rows;
+
         if ($qt_rows > 0) {
-            print "<table>";
-            print "<th>ID</th>";
-            print "<th>Nome</th>";
-            print "<th>pais</th>";
-            print "<th>acoes</th>";
-            print "</tr>";
+            echo "<table border='1'>";
+            echo "<tr>";
+            echo "<th>ID</th>";
+            echo "<th>Nome</th>";
+            echo "<th>Pais</th>";
+            echo "<th>Ações</th>";
+            echo "</tr>";
+
             while ($row = $ans_rows->fetch_object()) {
-                print "<tr>";
-                print "<td>".$row->id_cidade."</td>";
-                print "<td>".$row->nm_cidade."</td>";
-                print "<td>".$row->nm_pais."</td>";
-                print "<td>
-                        <button type='submit' name='acao' value='delete' id=".$row->id_cidade."'>excluir</button>
-                        </td>";
-                print "<td>
-                            <button type='button' onclick='window.location.href='editar_cidade.php'>editar</button>
-                        </td>";
-                print "</tr>";
+                echo "<tr>";
+                echo "<td>".$row->id_cidade."</td>";
+                echo "<td>".$row->nm_cidade."</td>";
+                echo "<td>".$row->nm_pais."</td>";
+                echo "<td>
+                        <form action='actions/crud_cidade.php' method='POST' style='display:inline-block;'>
+                            <input type='hidden' name='id_cidade' value='".$row->id_cidade."'>
+                            <button type='submit' name='acao' value='delete'>Excluir</button>
+                        </form>
+                        <form action='editar_cidade.php' method='GET' style='display:inline-block;'>
+                            <input type='hidden' name='id_cidade' value='".$row->id_cidade."'>
+                            <button type='submit'>Editar</button>
+                        </form>
+                      </td>";
+                echo "</tr>";
             }
-            print "</table>";
+            echo "</table>";
         } else {
-            echo "erro ao consultar os dados das cidades";
+            echo "Nenhuma cidade encontrada.";
         }
         ?>
         </div>

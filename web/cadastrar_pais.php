@@ -36,36 +36,52 @@
             </div>
         </div>
         <div class="table table-border table-striped d-flex justify-content-center">
-       <?php
-        $sql_rows = "SELECT * FROM tb_pais";
-        $ans_rows = $conex->query($sql_rows);
-        $qt_rows = $ans_rows->num_rows;
+<?php
+include("includes/general/conn.php");
 
-        if(!$ans_rows){
-            die("erro".$conex->error);
-        }
+$sql_rows = "SELECT * FROM tb_pais";
+$ans_rows = $conex->query($sql_rows);
 
-        if ($qt_rows > 0) {
-            print "<tr>";
-            print "<table>";
-            print "<th>ID</th>";
-            print "<th>Nome</th>";
-            print "<th>Continente</th>";
-            print "<th>Lingua</th>";
-            print "</tr>";
-            while ($row = $ans_rows->fetch_object()) {
-                print "<tr>";
-                print "<td>".$row->id_pais."</td>";
-                print "<td>".$row->nm_pais."</td>";
-                print "<td>".$row->continente_pais."</td>";
-                print "<td>".$row->lingua_pais."</td>";
-                print "</tr>";
-            }
-            print "</table>";
-        } else {
-            echo "erro ao consultar os dados das cidades";
-        }
-        ?>    
+if(!$ans_rows){
+    die("Erro: " . $conex->error);
+}
+
+$qt_rows = $ans_rows->num_rows;
+
+if ($qt_rows > 0) {
+    echo "<table border='1'>";
+    echo "<tr>";
+    echo "<th>ID</th>";
+    echo "<th>Nome</th>";
+    echo "<th>Continente</th>";
+    echo "<th>Língua</th>";
+    echo "<th>Ações</th>";
+    echo "</tr>";
+
+    while ($row = $ans_rows->fetch_object()) {
+        echo "<tr>";
+        echo "<td>".$row->id_pais."</td>";
+        echo "<td>".$row->nm_pais."</td>";
+        echo "<td>".$row->continente_pais."</td>";
+        echo "<td>".$row->lingua_pais."</td>";
+        echo "<td>
+                <form action='actions/crud_pais.php' method='POST' style='display:inline-block;'>
+                    <input type='hidden' name='id_pais' value='".$row->id_pais."'>
+                    <button type='submit' name='acao' value='delete'>Excluir</button>
+                </form>
+                <form action='editar_pais.php' method='GET' style='display:inline-block;'>
+                    <input type='hidden' name='id_pais' value='".$row->id_pais."'>
+                    <button type='submit'>Editar</button>
+                </form>
+              </td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "Nenhum país encontrado.";
+}
+?>
+  
     </main>
 </body>
 <?php require("includes/general/footer.php"); ?>
