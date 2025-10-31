@@ -23,23 +23,25 @@ $continente_pais = $_POST['continente_pais'];
 
             break;
         case 'delete':
-            $sql1 = "DELETE FROM tb_cidade WHERE nm_pais = '$nm_pais'";
-            $ans1 =  $conex->query($sql1);
-            if ($ans1==true){
-                print "<script>alert('pais excluido com sucesso');</script>";
-                print "<script>location.href='../cadastrar_pais.php'</script>";
-            }else{
-                print "<script>alert('erro ao excluir ans1');</script>".mysqli_error($conex);
-            }
-            
-            $sql2 = "DELETE FROM tb_pais WHERE id_pais = '$id_pais'";
-            $ans2 =  $conex->query($sql2);
-            if ($ans2==true ){
-                print "<script>alert('pais excluido com sucesso');</script>";
-                print "<script>location.href='../cadastrar_pais.php'</script>";
-            }else{
-                print "<script>alert('erro ao excluir ans2');</script>".mysqli_error($conex);
-            }
+                // First remove cities that reference this country (by id_pais)
+                if (!empty($id_pais)){
+                    $sql1 = "DELETE FROM tb_cidade WHERE id_pais = '$id_pais'";
+                    $ans1 =  $conex->query($sql1);
+                    if ($ans1 === false){
+                        print "<script>alert('erro ao excluir cidades vinculadas: " . addslashes($conex->error) . "');location.href='../cadastrar_pais.php'</script>";
+                        exit;
+                    }
+
+                    $sql2 = "DELETE FROM tb_pais WHERE id_pais = '$id_pais'";
+                    $ans2 =  $conex->query($sql2);
+                    if ($ans2){
+                        print "<script>alert('pais excluido com sucesso');location.href='../cadastrar_pais.php'</script>";
+                    }else{
+                        print "<script>alert('erro ao excluir pais: " . addslashes($conex->error) . "');location.href='../cadastrar_pais.php'</script>";
+                    }
+                }else{
+                    print "<script>alert('ID do país não informado');location.href='../cadastrar_pais.php'</script>";
+                }
             break;
     }
 

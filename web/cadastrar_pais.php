@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/styles.css">
     <title>CRUDMundo</title>
 </head>
@@ -23,7 +24,7 @@
                         <input type="text" name="nm_pais" placeholder="nome" required>
                         <input type="text" name="lingua_pais" placeholder="lingua falada" required>
                         <select id="continente_pais" name="continente_pais" placeholder="continente" required>
-                            <option value="NORTE-AMERICA4">Ameriaca do norte</option>
+                            <option value="NORTE-AMERICA">America do norte</option>
                             <option value="SUL-AMERICA">America do sul</option>
                             <option value="Europa">Europa</option>
                             <option value="Asia">Asia</option>

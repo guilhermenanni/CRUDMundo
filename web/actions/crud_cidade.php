@@ -1,48 +1,62 @@
 <?php
 require("../includes/general/conn.php");
 
-$id_cidade = $_POST['id_cidade'];
-$nm_cidade = $_POST['nm_cidade'];
-$id_pais = $_POST['id_pais']; 
+$acao = $_REQUEST['acao'] ?? '';
 
-    switch ($_REQUEST['acao']){
-        case 'create':
-            $sql = "INSERT INTO tb_cidade(nm_cidade, id_pais) VALUES ('$nm_cidade', '$id_pais)";
-            $ans = $conex->query($sql);
-            if ($ans==true){
-                print "<script>alert('cidade cadastrada com sucesso');</script>";
-                print "<script>location.href='../cadastrar_cidade.php'</script>";
-            }else{
-                print "<script>alert('erro ao cadastrar');</script>".mysqli_error($conex);
-            }
-            break;
+$nm_cidade = isset($_POST['nm_cidade']) ? $conex->real_escape_string($_POST['nm_cidade']) : '';
+$id_pais = isset($_POST['id_pais']) ? $conex->real_escape_string($_POST['id_pais']) : '';
+$id_cidade = isset($_POST['id_cidade']) ? $conex->real_escape_string($_POST['id_cidade']) : '';
 
-        case 'update':
-            $sql_change_name = "UPDATE tb_cidades SET nm_cidade = '$nm_cidade' WHERE id_cidade = '$id_cidade'";
-            $sql_change_fk = '';
-            $ans_chage_name = $conex->query($sql_change_name);
-            $ans_chage_fk = $conex->query($sql_change_fk);
+switch ($acao){
+    case 'create':
+        if (empty($nm_cidade) || empty($id_pais)){
+            print "<script>alert('Dados incompletos');location.href='../cadastrar_cidade.php'</script>";
+            exit;
+        }
 
-            if ($ans_chage_name==true && $ans_chage_fk==true) {
-                print"<script>alert('cidade alterada com sucesso')</script>";
-                }else{
-                    print "<script>location.href=../update_cidade.php</script>";
-                }
-            
+        $sql = "INSERT INTO tb_cidade (nm_cidade, id_pais) VALUES ('$nm_cidade', '$id_pais')";
+        $ans = $conex->query($sql);
+        if ($ans){
+            print "<script>alert('cidade cadastrada com sucesso');location.href='../cadastrar_cidade.php'</script>";
+        }else{
+            print "<script>alert('erro ao cadastrar: " . addslashes($conex->error) . "');location.href='../cadastrar_cidade.php'</script>";
+        }
+        break;
 
-            break;
-        
-        case 'delete':
-            $sql = "DELETE FROM tb_cidade WHERE id_cidade = '$id_cidade'";
-            $ans = $conex->query(query: $sql);
+    case 'update':
+        if (empty($id_cidade)){
+            print "<script>alert('ID da cidade não informado');location.href='../cadastrar_cidade.php'</script>";
+            exit;
+        }
 
-            if ($ans==true){
-                print"<script>alert('cidade deletada com sucesso')</script>";
-                print"<script>location.href='../cadastrar_cidade.php'</script>";
-            }else{
-                print"<script>alert('erro ao deletar')</script>".mysqli_error($conex);
-            }
-            break;
-    }
+        $sql = "UPDATE tb_cidade SET nm_cidade = '$nm_cidade', id_pais = '$id_pais' WHERE id_cidade = '$id_cidade'";
+        $ans = $conex->query($sql);
+
+        if ($ans){
+            print "<script>alert('cidade alterada com sucesso');location.href='../cadastrar_cidade.php'</script>";
+        }else{
+            print "<script>alert('erro ao alterar: " . addslashes($conex->error) . "');location.href='../cadastrar_cidade.php'</script>";
+        }
+        break;
+
+    case 'delete':
+        if (empty($id_cidade)){
+            print "<script>alert('ID da cidade não informado');location.href='../cadastrar_cidade.php'</script>";
+            exit;
+        }
+
+        $sql = "DELETE FROM tb_cidade WHERE id_cidade = '$id_cidade'";
+        $ans = $conex->query($sql);
+
+        if ($ans){
+            print "<script>alert('cidade deletada com sucesso');location.href='../cadastrar_cidade.php'</script>";
+        }else{
+            print "<script>alert('erro ao deletar: " . addslashes($conex->error) . "');location.href='../cadastrar_cidade.php'</script>";
+        }
+        break;
+
+    default:
+        print "<script>alert('Ação inválida');location.href='../cadastrar_cidade.php'</script>";
+}
 
 ?>
