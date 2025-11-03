@@ -20,7 +20,8 @@ $continente_pais = $_POST['continente_pais'];
             break;
 
         case 'update':
-
+                print "<script>location.href='../editar_pais.php'</script>";
+                
             break;
         case 'delete':
                 // First remove cities that reference this country (by id_pais)
