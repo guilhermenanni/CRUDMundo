@@ -21,7 +21,18 @@
                 <h1>Cidades</h1>
                 <form action="actions/crud_cidade.php" method="POST" class="pais-create">
                         <input type="text" name="nm_cidade" placeholder="nome" required>
-                        <input type="text" name="id_pais" placeholder="pais ao qual pertence" required>
+                        <select name="id_pais" required>
+                            <option value="">-- selecione um país --</option>
+                            <?php
+                            $sql_p = "SELECT id_pais, nm_pais FROM tb_pais ORDER BY nm_pais";
+                            $res_p = $conex->query($sql_p);
+                            if($res_p){
+                                while($p = $res_p->fetch_assoc()){
+                                    echo "<option value='".htmlspecialchars($p['id_pais'])."'>".htmlspecialchars($p['nm_pais'])."</option>";
+                                }
+                            }
+                            ?>
+                        </select>
                     <button type="submit" name="acao" value="create">cadastrar</button>
                 </form>
             </div>
@@ -48,17 +59,21 @@
             echo "</tr>";
 
             while ($row = $ans_rows->fetch_object()) {
+                $id_cidade = htmlspecialchars($row->id_cidade);
+                $nm_cidade = htmlspecialchars($row->nm_cidade);
+                $nm_pais = htmlspecialchars($row->nm_pais);
+
                 echo "<tr>";
-                echo "<td>".$row->id_cidade."</td>";
-                echo "<td>".$row->nm_cidade."</td>";
-                echo "<td>".$row->nm_pais."</td>";
+                echo "<td>".$id_cidade."</td>";
+                echo "<td>".$nm_cidade."</td>";
+                echo "<td>".$nm_pais."</td>";
                 echo "<td>
                         <form action='actions/crud_cidade.php' method='POST' style='display:inline-block;'>
-                            <input type='hidden' name='id_cidade' value='".$row->id_cidade."'>
+                            <input type='hidden' name='id_cidade' value='".$id_cidade."'>
                             <button type='submit' name='acao' value='delete'>Excluir</button>
                         </form>
                         <form action='editar_cidade.php' method='GET' style='display:inline-block;'>
-                            <input type='hidden' name='id_cidade' value='".$row->id_cidade."'>
+                            <input type='hidden' name='id_cidade' value='".$id_cidade."'>
                             <button type='submit'>Editar</button>
                         </form>
                       </td>";

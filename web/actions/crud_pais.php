@@ -1,49 +1,42 @@
 <?php
-require("../includes/general/conn.php");
+include("../includes/general/conn.php");
 
-$id_pais = $_POST['id_pais'];
-$nm_pais = $_POST['nm_pais'];
-$lingua_pais = $_POST['lingua_pais'];
-$continente_pais = $_POST['continente_pais'];
-
-
-    switch ($_REQUEST['acao']){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $acao = $_POST['acao'] ?? '';
+    
+    switch($acao) {
         case 'create':
-            $sql = "INSERT INTO tb_pais (nm_pais, lingua_pais, continente_pais) VALUES ('$nm_pais', '$lingua_pais', '$continente_pais')";
-            $ans = $conex->query($sql);
-            if ($ans==true){
-                print "<script>alert('pais cadastrado com sucesso');</script>";
-                print "<script>location.href='../cadastrar_pais.php'</script>";
-            }else{
-                print "<script>alert('erro ao cadastrar');</script>".mysqli_error($conex);
-            }
+            $nome = $conex->real_escape_string($_POST['nm_pais']);
+            $lingua = $conex->real_escape_string($_POST['lingua_pais']);
+            $continente = $conex->real_escape_string($_POST['continente_pais']);
+            
+            $sql = "INSERT INTO tb_pais (nm_pais, lingua_pais, continente_pais) VALUES ('$nome', '$lingua', '$continente')";
             break;
-
+            
         case 'update':
-                print "<script>location.href='../editar_pais.php'</script>";
-                
+            $id = intval($_POST['id_pais']);
+            $nome = $conex->real_escape_string($_POST['nm_pais']);
+            $lingua = $conex->real_escape_string($_POST['lingua_pais']);
+            $continente = $conex->real_escape_string($_POST['continente_pais']);
+            
+            $sql = "UPDATE tb_pais SET nm_pais='$nome', lingua_pais='$lingua', continente_pais='$continente' WHERE id_pais=$id";
             break;
+            
         case 'delete':
-                // First remove cities that reference this country (by id_pais)
-                if (!empty($id_pais)){
-                    $sql1 = "DELETE FROM tb_cidade WHERE id_pais = '$id_pais'";
-                    $ans1 =  $conex->query($sql1);
-                    if ($ans1 === false){
-                        print "<script>alert('erro ao excluir cidades vinculadas: " . addslashes($conex->error) . "');location.href='../cadastrar_pais.php'</script>";
-                        exit;
-                    }
-
-                    $sql2 = "DELETE FROM tb_pais WHERE id_pais = '$id_pais'";
-                    $ans2 =  $conex->query($sql2);
-                    if ($ans2){
-                        print "<script>alert('pais excluido com sucesso');location.href='../cadastrar_pais.php'</script>";
-                    }else{
-                        print "<script>alert('erro ao excluir pais: " . addslashes($conex->error) . "');location.href='../cadastrar_pais.php'</script>";
-                    }
-                }else{
-                    print "<script>alert('ID do país não informado');location.href='../cadastrar_pais.php'</script>";
-                }
+            $id = intval($_POST['id_pais']);
+            $sql = "DELETE FROM tb_pais WHERE id_pais=$id";
             break;
+            
+        default:
+            header('Location: ../cadastrar_pais.php');
+            exit;
     }
-
-?>
+    
+    if ($conex->query($sql)) {
+        print "<script>alert('Operação realizada com sucesso!');location.href='../cadastrar_pais.php';</script>";
+    } else {
+        print "<script>alert('Erro ao realizar operação: " . $conex->error . "');location.href='../cadastrar_pais.php';</script>";
+    }
+} else {
+    header('Location: ../cadastrar_pais.php');
+}

@@ -23,23 +23,20 @@
                 <form action="actions/crud_pais.php" method="POST" class="pais-create">
                         <input type="text" name="nm_pais" placeholder="nome" required>
                         <input type="text" name="lingua_pais" placeholder="lingua falada" required>
-                        <select id="continente_pais" name="continente_pais" placeholder="continente" required>
+                        <select id="continente_pais" name="continente_pais" required>
                             <option value="NORTE-AMERICA">America do norte</option>
                             <option value="SUL-AMERICA">America do sul</option>
-                            <option value="Europa">Europa</option>
-                            <option value="Asia">Asia</option>
-                            <option value="Africa">Africa</option>
-                            <option value="Oceania">Oceania</option>
+                            <option value="EUROPA">Europa</option>
+                            <option value="ASIA">Asia</option>
+                            <option value="AFRICA">Africa</option>
+                            <option value="OCEANIA">Oceania</option>
                         </select>
                     <button type="submit" value="create" name="acao">cadastrar</button>
-                    <button type="submit" value="delete" name="acao">excluir</button>
                 </form>
             </div>
         </div>
         <div class="table table-border table-striped d-flex justify-content-center">
 <?php
-include("includes/general/conn.php");
-
 $sql_rows = "SELECT * FROM tb_pais";
 $ans_rows = $conex->query($sql_rows);
 
@@ -48,6 +45,15 @@ if(!$ans_rows){
 }
 
 $qt_rows = $ans_rows->num_rows;
+
+$continente_labels = [
+    'NORTE-AMERICA' => 'America do norte',
+    'SUL-AMERICA' => 'America do sul',
+    'EUROPA' => 'Europa',
+    'ASIA' => 'Asia',
+    'AFRICA' => 'Africa',
+    'OCEANIA' => 'Oceania',
+];
 
 if ($qt_rows > 0) {
     echo "<table border='1'>";
@@ -60,18 +66,23 @@ if ($qt_rows > 0) {
     echo "</tr>";
 
     while ($row = $ans_rows->fetch_object()) {
+        $id = htmlspecialchars($row->id_pais);
+        $nome = htmlspecialchars($row->nm_pais);
+        $lingua = htmlspecialchars($row->lingua_pais);
+        $continente = $continente_labels[$row->continente_pais] ?? htmlspecialchars($row->continente_pais);
+
         echo "<tr>";
-        echo "<td>".$row->id_pais."</td>";
-        echo "<td>".$row->nm_pais."</td>";
-        echo "<td>".$row->continente_pais."</td>";
-        echo "<td>".$row->lingua_pais."</td>";
+        echo "<td>".$id."</td>";
+        echo "<td>".$nome."</td>";
+        echo "<td>".$continente."</td>";
+        echo "<td>".$lingua."</td>";
         echo "<td>
                 <form action='actions/crud_pais.php' method='POST' style='display:inline-block;'>
-                    <input type='hidden' name='id_pais' value='".$row->id_pais."'>
+                    <input type='hidden' name='id_pais' value='".$id."'>
                     <button type='submit' name='acao' value='delete'>Excluir</button>
                 </form>
                 <form action='editar_pais.php' method='GET' style='display:inline-block;'>
-                    <input type='hidden' name='id_pais' value='".$row->id_pais."'>
+                    <input type='hidden' name='id_pais' value='".$id."'>
                     <button type='submit'>Editar</button>
                 </form>
               </td>";
